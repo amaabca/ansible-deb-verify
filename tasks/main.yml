@@ -1,2 +1,12 @@
 ---
-# tasks file for ansible-deb-verify
+- name: Install debsums from APT
+  apt:
+    state: latest
+    name: debsums
+    autoremove: yes
+    update_cache: yes
+  become: yes
+
+- name: Verify DPKG/APT Package Integrity
+  command: debsums -s
+  become: yes
